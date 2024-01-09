@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+ * error - prints formatted string to the stderr
+ * @n: number of arguments
+ *
+ * description: stops program with EXIT_FAILURE status
+ */
+
 void error(int n, ...)
 {
 	va_list msgs;

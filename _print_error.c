@@ -19,7 +19,7 @@ void error(int n, ...)
 	{
 		msg = va_arg(msgs, char *);
 		if (i != n - 1)
-			fprintf(stderr, RED "%s " COLOR_RESET, msg);
+			fprintf(stderr, RED "%s" COLOR_RESET, msg);
 		else
 			fprintf(stderr, RED "%s\n" COLOR_RESET, msg);
 	}

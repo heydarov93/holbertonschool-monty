@@ -6,8 +6,8 @@
 
 void init_global(void)
 {
-	global.value = "hello world";
-	global.int_value = 5500;
+	global.value = "\0";
+	global.int_value = 0;
 	global.line = 0;
 	global.stack = NULL;
 	global.opcode = NULL;

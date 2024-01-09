@@ -10,13 +10,16 @@
 
 int main(int argc, char **argv)
 {
-	FILE *filename;
 	stack_t *ptr_stack, stack;
+	//instruction_t instructions[7] = { {"push", push} }
 
 	ptr_stack = &stack;
 
 	if (argc != 2)
-		error(1, "USAGE: monty file");
+	{
+		fprintf(stderr, RED "USAGE: monty file\n" COLOR_RESET);
+		exit (EXIT_FAILURE);
+	}
 
 	init_global();
 
@@ -24,12 +27,14 @@ int main(int argc, char **argv)
 	ptr_stack->prev = NULL;
 	ptr_stack->next = NULL;
 
-	filename = fopen(argv[1], "r");
+	global.file = fopen(argv[1], "r");
 
-	if (!filename)
-		error(2, "Error: Can't open file", argv[1]);
+	if (!global.file)
+		error(2, "Error: Can't open file ", argv[1]);
 
-	_read_file(filename);
+	_read_file();
+
+	fclose(global.file);
 
 	return (0);
 }

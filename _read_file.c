@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * _read_file - to read file line by line
+ * @stream: pointer to the file
+ */
+
 void _read_file(FILE *stream)
 {
 	char *line = NULL;

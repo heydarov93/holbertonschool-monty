@@ -4,10 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stddef.h>
 
-/**
- * regular text color for error messages
- */
 #define RED "\033[0;31m"
 #define COLOR_RESET "\033[0m"
 
@@ -42,10 +40,30 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * function prototypes
+ * struct global_s - global struct to use through all files
+ * @int_value: integer
+ * @value: value from file (str)
+ * @line: number of read lines
+ * @stack: pointer to the stack
+ * @opcode: operation code
+ *
+ * Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO
  */
+typedef struct global_s
+{
+	int int_value;
+	char *value;
+	unsigned int line;
+	stack_t *stack;
+	char *opcode;
+} global_t;
+
+global_t global;
+
 void error(int n, ...);
 void _read_file(FILE *stream);
 void push(stack_t **stack, unsigned int line_number);
+void init_global(void);
 
 #endif

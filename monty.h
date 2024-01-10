@@ -42,6 +42,7 @@ typedef struct instruction_s
 
 /**
  * struct global_s - global struct to use through all files
+ * @file: pointer to the opened file
  * @int_value: integer
  * @value: value from file (str)
  * @line: number of read lines
@@ -64,9 +65,12 @@ typedef struct global_s
 global_t global;
 
 void error(int n, ...);
-int _read_file(void);
+int _read_execute(void);
+int _execute(void);
 void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 void init_global(void);
 int split_line(char **line);
+void free_all_stack(void);
 
 #endif

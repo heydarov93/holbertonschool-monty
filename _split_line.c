@@ -1,5 +1,13 @@
 #include "monty.h"
 
+/**
+ * split_line - splits line into command and value
+ * @line: line
+ *
+ * Return: 0 on success, -1 on failure
+ */
+
+
 int split_line(char **line)
 {
 	char *token;
@@ -14,8 +22,10 @@ int split_line(char **line)
 
 	token = strtok(NULL, delim);
 
-	if (token != NULL)
+	if (token != NULL && strlen(token) != 0)
 		global.value = token;
+	else
+		global.value = "\0";
 
 	return (0);
 }

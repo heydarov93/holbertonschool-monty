@@ -51,7 +51,9 @@ void _execute(void)
 {
 	int i;
 	instruction_t commands[] = {
-		{"push", push}, {"pall", pall}, {NULL, NULL}
+		{"push", push}, {"pall", pall}, {"pint", pint},
+		{"pop", pop}, {"swap", swap}, {"add", add},
+		{"nop", nop}, {NULL, NULL}
 	};
 
 	for (i = 0; commands[i].opcode; i++)

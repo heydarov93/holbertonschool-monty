@@ -15,10 +15,18 @@ void push(stack_t **stack, unsigned int line_number)
 	if (new_stack == NULL)
 	{
 		free(new_stack);
+		global.error = 500;
 		return;
 	}
 
-	new_stack->n = global.int_value;
+	if (_isvalid_value() == -1)
+	{
+		global.error = 400;
+		free(new_stack);
+		return;
+	}
+
+	new_stack->n = atoi(global.value);
 	new_stack->prev = NULL;
 	new_stack->next = *stack;
 	*stack = new_stack;

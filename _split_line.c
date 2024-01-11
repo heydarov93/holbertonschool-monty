@@ -11,12 +11,14 @@
 int split_line(char **line)
 {
 	char *token;
-	const char *delim = " \t";
+	const char *delim = " \t\n";
 
 	token = strtok(*line, delim);
 
 	if (token == NULL)
+	{
 		return (-1);
+	}
 
 	global.opcode = token;
 

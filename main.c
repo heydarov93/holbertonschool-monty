@@ -21,30 +21,17 @@ int main(int argc, char **argv)
 	global.file = fopen(argv[1], "r");
 
 	if (!global.file)
-		error(2, "Error: Can't open file ", argv[1]);
+	{
+		fprintf(stderr,
+			RED "Error: Can't open file %s\n" COLOR_RESET,
+			argv[1]);
+		exit(EXIT_FAILURE);
+	}
 
 	if (_read_execute() == -1)
-		exit(EXIT_FAILURE);
+		print_error(global.error);
 
-	fclose(global.file);
 	free_all_stack();
-
 	return (0);
 }
 
-/**
- * free_all_stack - frees all stack
- *
- */
-
-void free_all_stack(void)
-{
-	stack_t *tmp_stack = global.stack;
-
-	while (global.stack)
-	{
-		tmp_stack = global.stack->next;
-		free(global.stack);
-		global.stack = tmp_stack;
-	}
-}

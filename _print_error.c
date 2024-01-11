@@ -1,29 +1,33 @@
 #include "monty.h"
 
 /**
- * error - prints formatted string to the stderr
- * @n: number of arguments
+ * print_error - prints formatted string to the stderr
+ * @err_code: error code
  *
  * description: stops program with EXIT_FAILURE status
  */
 
-void error(int n, ...)
+void print_error(int err_code)
 {
-	va_list msgs;
-	int i;
-	char *msg;
-
-	va_start(msgs, n);
-
-	for (i = 0; i < n; i++)
+	switch (err_code)
 	{
-		msg = va_arg(msgs, char *);
-		if (i != n - 1)
-			fprintf(stderr, RED "%s" COLOR_RESET, msg);
-		else
-			fprintf(stderr, RED "%s\n" COLOR_RESET, msg);
+		case 400 :
+			fprintf(stderr,
+				RED "L%u: usage: push integer\n" COLOR_RESET,
+				global.line);
+			break;
+		case 404 :
+			fprintf(stderr,
+				RED "L%u: unknown instruction %s\n" COLOR_RESET,
+				global.line, global.opcode);
+			break;
+		case 500 :
+			fprintf(stderr, RED "Error: malloc failed\n" COLOR_RESET);
+			break;
 	}
 
-	va_end(msgs);
+	free(global.opcode);
+	fclose(global.file);
+	free_all_stack();
 	exit(EXIT_FAILURE);
 }

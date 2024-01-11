@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <string.h>
+#include <ctype.h>
 
 #define RED "\033[0;31m"
 #define COLOR_RESET "\033[0m"
@@ -55,22 +56,23 @@ typedef struct instruction_s
 typedef struct global_s
 {
 	FILE *file;
-	int int_value;
 	char *value;
 	unsigned int line;
 	stack_t *stack;
 	char *opcode;
+	int error;
 } global_t;
 
 global_t global;
 
-void error(int n, ...);
 int _read_execute(void);
-int _execute(void);
+void _execute(void);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void init_global(void);
 int split_line(char **line);
 void free_all_stack(void);
+int _isvalid_value(void);
+void print_error(int err_code);
 
 #endif

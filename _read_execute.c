@@ -14,19 +14,22 @@ int _read_execute(void)
 	while (getline(&line, &n, global.file) != -1)
 	{
 		global.line++;
-		trimmed_line = strdup(strtok(line, "\n"));
+		//printf("line %ld\n", strlen(line));
+		trimmed_line = strdup(line);
 		free(line);
 
-		split_line(&trimmed_line);
-
-		if (strcmp(global.value, "\0") != 0)
-			global.int_value = atoi(global.value);
-
-		if (_execute() == -1)
+		if (split_line(&trimmed_line) == -1)
 		{
-			fprintf(stderr,
-				RED "L%u: unknown instruction %s\n" COLOR_RESET,
-				global.line, global.opcode);
+			free(trimmed_line);
+			line = NULL;
+			continue;
+		}
+
+		_execute();
+
+		if (global.error != 200)
+		{
+			global.opcode = strdup(strtok(trimmed_line, " \n\t"));
 			free(trimmed_line);
 			return (-1);
 		}
@@ -45,7 +48,7 @@ int _read_execute(void)
  * Return: 0 on success, -1 on failure
  */
 
-int _execute(void)
+void _execute(void)
 {
 	int i;
 	instruction_t commands[] = {
@@ -57,12 +60,10 @@ int _execute(void)
 		if (strcmp(commands[i].opcode, global.opcode) == 0)
 		{
 			commands[i].f(&global.stack, global.line);
-			break;
+			return;
 		}
 	}
 
 	if (commands[i].opcode == NULL)
-		return (-1);
-
-	return (0);
+		global.error = 404;
 }

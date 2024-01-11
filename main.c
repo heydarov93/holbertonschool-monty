@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		fprintf(stderr, RED "USAGE: monty file\n" COLOR_RESET);
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	if (!global.file)
 	{
 		fprintf(stderr,
-			RED "Error: Can't open file %s\n" COLOR_RESET,
+			"Error: Can't open file %s\n",
 			argv[1]);
 		exit(EXIT_FAILURE);
 	}

@@ -13,16 +13,16 @@ void print_error(int err_code)
 	{
 		case 400:
 			fprintf(stderr,
-				RED "L<%u>: usage: push integer\n" COLOR_RESET,
+				"L<%u>: usage: push integer\n",
 				global.line);
 			break;
 		case 404:
 			fprintf(stderr,
-				RED "L<%u>: unknown instruction <%s>\n" COLOR_RESET,
+				"L<%u>: unknown instruction <%s>\n",
 				global.line, global.opcode);
 			break;
 		case 500:
-			fprintf(stderr, RED "Error: malloc failed\n" COLOR_RESET);
+			fprintf(stderr, "Error: malloc failed\n");
 			break;
 	}
 

@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * push - prints all stack
+ * push - adds new stack
  * @stack: pointer to the pointer to the stack
  * @line_number: the line number currently being read
  *

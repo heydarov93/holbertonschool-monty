@@ -10,6 +10,8 @@
 
 int main(int argc, char **argv)
 {
+	char *extension;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -19,9 +21,14 @@ int main(int argc, char **argv)
 	init_global();
 
 	global.file = fopen(argv[1], "r");
-
-	if (!global.file)
+	extension = strstr(argv[1], ".m");
+	if (
+		!global.file ||
+		!extension ||
+		strcmp(extension, ".m") != 0
+	)
 	{
+		fclose(global.file);
 		fprintf(stderr,
 			"Error: Can't open file %s\n",
 			argv[1]);

@@ -32,6 +32,7 @@ int main(int argc, char **argv)
 		print_error(global.error);
 
 	free_all_stack();
+	fclose(global.file);
 	return (0);
 }
 

@@ -14,7 +14,6 @@ int _read_execute(void)
 	while (getline(&line, &n, global.file) != -1)
 	{
 		global.line++;
-		//printf("line %ld\n", strlen(line));
 		trimmed_line = strdup(line);
 		free(line);
 

@@ -44,7 +44,7 @@ typedef struct instruction_s
 /**
  * struct global_s - global struct to use through all files
  * @file: pointer to the opened file
- * @int_value: integer
+ * @error: error code
  * @value: value from file (str)
  * @line: number of read lines
  * @stack: pointer to the stack

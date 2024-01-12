@@ -15,7 +15,6 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (new_stack == NULL)
 	{
-		free(new_stack);
 		global.error = 500;
 		return;
 	}

@@ -43,5 +43,8 @@ void push(stack_t **stack, unsigned int line_number)
 	new_stack->n = atoi(global.value);
 	new_stack->prev = NULL;
 	new_stack->next = *stack;
+	if (*stack)
+		(*stack)->prev = new_stack;
+
 	*stack = new_stack;
 }

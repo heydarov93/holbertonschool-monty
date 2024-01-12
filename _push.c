@@ -9,7 +9,7 @@
 
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_stack = (stack_t *)malloc(sizeof(stack_t));
+	stack_t *new_stack = malloc(sizeof(stack_t));
 	(void) line_number;
 	char sign = '\0';
 

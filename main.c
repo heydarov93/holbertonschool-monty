@@ -21,12 +21,8 @@ int main(int argc, char **argv)
 	init_global();
 
 	global.file = fopen(argv[1], "r");
-	extension = strstr(argv[1], ".m");
-	if (
-		!global.file ||
-		!extension ||
-		strcmp(extension, ".m") != 0
-	)
+
+	if (!global.file)
 	{
 		fclose(global.file);
 		fprintf(stderr,

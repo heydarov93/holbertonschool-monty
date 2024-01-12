@@ -11,7 +11,7 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_stack = (stack_t *)malloc(sizeof(stack_t));
 	(void) line_number;
-	int value;
+	char sign = '\0';
 
 	if (new_stack == NULL)
 	{
@@ -19,15 +19,28 @@ void push(stack_t **stack, unsigned int line_number)
 		global.error = 500;
 		return;
 	}
-	value = atoi(global.value);
-	if (_isvalid_value() == -1 || value < 0)
+
+	if (
+		global.value[1] &&
+		(global.value[0] == '-' || global.value[0] == '+')
+	)
+	{
+		sign = global.value[0];
+		global.value[0] = '1';
+	}
+
+
+	if (_isvalid_value() == -1)
 	{
 		global.error = 400;
 		free(new_stack);
 		return;
 	}
 
-	new_stack->n = value;
+	if (sign != '\0')
+		global.value[0] = sign;
+
+	new_stack->n = atoi(global.value);
 	new_stack->prev = NULL;
 	new_stack->next = *stack;
 	*stack = new_stack;

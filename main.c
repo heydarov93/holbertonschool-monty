@@ -10,26 +10,32 @@
 
 int main(int argc, char **argv)
 {
-	FILE *filename;
-	stack_t *ptr_stack, stack;
-
-	ptr_stack = &stack;
+	char *ext;
 
 	if (argc != 2)
-		error(1, "USAGE: monty file");
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 
 	init_global();
 
-	ptr_stack->n = global.int_value;
-	ptr_stack->prev = NULL;
-	ptr_stack->next = NULL;
+	global.file = fopen(argv[1], "r");
+	ext = strstr(argv[1], ".");
+	if (!global.file || !ext)
+	{
+		fclose(global.file);
+		fprintf(stderr,
+			"Error: Can't open file %s\n",
+			argv[1]);
+		exit(EXIT_FAILURE);
+	}
 
-	filename = fopen(argv[1], "r");
+	if (_read_execute() == -1)
+		print_error(global.error);
 
-	if (!filename)
-		error(2, "Error: Can't open file", argv[1]);
-
-	_read_file(filename);
-
+	free_all_stack();
+	fclose(global.file);
 	return (0);
 }
+

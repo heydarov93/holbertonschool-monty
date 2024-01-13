@@ -5,9 +5,8 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stddef.h>
-
-#define RED "\033[0;31m"
-#define COLOR_RESET "\033[0m"
+#include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -41,7 +40,8 @@ typedef struct instruction_s
 
 /**
  * struct global_s - global struct to use through all files
- * @int_value: integer
+ * @file: pointer to the opened file
+ * @error: error code
  * @value: value from file (str)
  * @line: number of read lines
  * @stack: pointer to the stack
@@ -52,18 +52,29 @@ typedef struct instruction_s
  */
 typedef struct global_s
 {
-	int int_value;
+	FILE *file;
 	char *value;
 	unsigned int line;
 	stack_t *stack;
 	char *opcode;
+	int error;
 } global_t;
 
 global_t global;
 
-void error(int n, ...);
-void _read_file(FILE *stream);
+int _read_execute(void);
+void _execute(void);
 void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 void init_global(void);
+int split_line(char **line);
+void free_all_stack(void);
+int _isvalid_value(void);
+void print_error(int err_code);
 
 #endif
